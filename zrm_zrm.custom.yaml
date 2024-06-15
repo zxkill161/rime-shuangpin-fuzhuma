@@ -1,0 +1,28 @@
+patch:
+  schema/dependencies: ''
+  speller/algebra/+:
+    - derive/^n/l/                    # n => l
+    - derive/^l/n/                    # l => n
+    - derive/^([a-z])y/$1n/           # ing => in
+    - derive/^([a-z])n/$1y/           # in => ing
+    - derive/^([a-z])f/$1g/           # en => eng
+    - derive/^([a-z])g/$1f/           # eng => en
+  recognizer/patterns: ''
+  switches:
+    - name: ascii_mode
+      states: ["中文", "西文"]
+    - name: full_shape
+      states: ["半角", "全角"]
+    - name: traditionalization
+      states: ["简", "繁"]
+    # - name: emoji
+    #   states: ["💀", "😄"]
+    # - name: chaifen
+    #   states: ["不拆", "扌斥"]
+    # - name: mars
+    #   reset: 0
+    #   states: ["地", "煋"]
+    - name: ascii_punct
+      states: ["。，", "．，"]
+
+

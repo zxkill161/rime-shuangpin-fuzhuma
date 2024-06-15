@@ -1,0 +1,21 @@
+patch:
+  schema_list:
+    - schema: zrm_zrm # 自然码+自然码部首辅助码
+    #- schema: moqi_zrm # 墨奇码自然双拼版
+    - schema: luna_pinyin_simp # 朙月拼音
+     
+  menu/page_size: 8 # 候选词个数
+
+    # 若 caps 切换大小写无效, 打开 Mac 系统偏好设置 > 键盘 > 输入法 > 取消勾选[使用大写锁定键切换“美国”输入模式]
+  ascii_composer/good_old_caps_lock: true # 若为 true， Caps 只切换大小写
+  ascii_composer/switch_key:
+    Caps_Lock: commit_code # Caps 键
+    Shift_L: noop # 左 Shift，切换中英文
+    #Shift_R: commit_code # 右 Shift，切换中英文
+    Control_L: noop # 左 Control，屏蔽该切换键
+    Control_R: noop # 右 Control，屏蔽该切换键
+  switcher:
+    hotkeys:
+      - Control+grave
+      # - Control+Shift+grave
+      # - F4

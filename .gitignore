@@ -27,6 +27,7 @@ sync/
 *.userdb/
 
 # 用户自定义配置
-*.custom.yaml
-*.custom.*
+# *.custom.yaml
+# *.custom.*
 program/generate_dict_code/jdh.dict.yaml
+user.custom.dict.txt
