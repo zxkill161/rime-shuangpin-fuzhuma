@@ -1,0 +1,53 @@
+patch:
+  switches_engine:  
+    switches:
+      - name: ascii_mode
+        states: [ 中文, 西文 ]
+      - name: full_shape
+        states: [ 半角, 全角 ]
+      - name: traditionalization
+        states: [ 简, 繁 ]
+      # - name: emoji
+      #   states: [ 💀, 😄 ]
+      # - name: chaifen
+      #   states: [ 不拆, 扌斥 ]
+      # - name: mars
+      #   reset: 0
+      #   states: [ 地, 煋 ] #火星文
+      - name: ascii_punct
+        states: [ 。，, ．， ]
+
+      translators:
+        # lua翻译器
+        - lua_translator@date_translator    # 时间、日期、星期
+        - lua_translator@lunar              # 农历
+        - lua_translator@unicode            # Unicode
+        - lua_translator@number_translator  # 数字、金额大写
+        - lua_translator@calc_translator    # 计算器
+        - punct_translator
+        # 码表翻译器 用于仓颉、五笔等基于码表的输入方案
+        # - table_translator@custom_phrase # 1、2码置顶
+        - table_translator@custom_phrase_3_code # 3码出简让全
+        - table_translator@custom_phrase_kf # 快符
+        - table_translator@custom_phrase_mqzg # 字根
+        - table_translator@custom_phrase_super_1jian # 1、2、3码时的tab上屏词
+        - table_translator@custom_phrase_super_2jian
+        - table_translator@custom_phrase_super_3jian
+        - table_translator@custom_phrase_super_3jian_no_conflict
+        - table_translator@custom_phrase_super_4jian_no_conflict
+        # - table_translator@big_char_set # 大字集
+        # - table_translator@emojis ## 添加注释后：停用ae模式emoji输入
+        # - table_translator@easy_en_simp ## 添加注释后：停用单词输入
+        # - table_translator@jp_sela ## 添加注释后：停用日语输入
+        # 反查翻译器
+        - reverse_lookup_translator
+        - reverse_lookup_translator@reverse_moqima
+        - reverse_lookup_translator@reverse_chaizi
+        - reverse_lookup_translator@reverse_stroke
+        - reverse_lookup_translator@reverse_zrlf
+        - reverse_lookup_translator@reverse_cj
+        # 脚本翻译器，用于拼音、粤拼等基于音节表的输入方案
+        - script_translator
+        - script_translator@user_dict_set
+        - script_translator@add_user_dict
+        
