@@ -1,4 +1,4 @@
--- doing 2码 3码时tab上屏词 置顶到第一候选的comment中
+-- 2码 3码时tab上屏词 置顶到第一候选的comment中
 -- @gaboolic
 
 local M = {}
@@ -50,7 +50,7 @@ function isAllLetters(str)
 end
 
 function M.func(input,env)
-  log.info("stick M.func")
+  -- log.info("stick M.func")
   local first_cand = nil
   for cand in input:iter() do
     local preedit_str = cand.preedit
@@ -59,7 +59,7 @@ function M.func(input,env)
       first_cand = cand
       if preedit_len <=3 and isAllLetters(preedit_str) then
         local stick_phrase = env.fixed[preedit_str] or ""
-        if stick_phrase ~= nil then
+        if stick_phrase ~= nil and first_cand.text ~= stick_phrase then
           first_cand.comment=stick_phrase
         end
         yield(first_cand)
