@@ -110,7 +110,7 @@ with open(file_path, "w") as file:
             if combination == 'pu':
                 word = '评审'
             if combination == 'xd':
-                word = '兄弟'
+                word = '许多'
             if combination == 'nm':
                 word = '你们'
             if combination == 'my':
@@ -121,6 +121,16 @@ with open(file_path, "w") as file:
                 word = '一种'
             if combination == 'zm':
                 word = '咱们'
+            if combination == 'fx':
+                word = '分享'
+            if combination == 'av':
+                word = '安装'
+            if combination == 'vm':
+                word = '专门'
+            if combination == 'gg':
+                word = '哥哥'
+            if combination == 'vn':
+                word = '智能'
             file.write(word+"\t"+combination+"/\n")
             # print(combination + " " + str(word_freq_list))
         # print(combination + jianpin_word_map[combination])
