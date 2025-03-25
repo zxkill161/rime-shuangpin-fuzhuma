@@ -32,7 +32,7 @@ for file in file_list:
                 word_list.append(word)
                 jianpin_word_map[jianpin] = word_list
 
-print(jianpin_word_map)
+#print(jianpin_word_map)
 
 # 生成 'aaa' 到 'zzz' 的字符串序列
 combinations = []
@@ -76,6 +76,7 @@ for file in file_list:
                 continue
             pinyin = params[1]
             shengmus = pinyin.split(" ")
+            #print(line)
             jianpin = shengmus[0][0] + shengmus[1][0] + shengmus[2][0]
 
             word_freq = {}
@@ -122,7 +123,44 @@ with open(file_path, "w") as file:
             word_freq_list = word_freq_list[:3]
             word = word_freq_list[0]['word']
             #print(word+"\t"+combination+"/")
-
+            if combination == 'xgl':
+                    word = 'X光'
+            if combination == 'txu':
+                word = 'T恤'
+            if combination == 'upj':
+                word = 'U盘'
+            if combination == 'bvj':
+                word = 'B站'
+            if combination == 'qbi':
+                word = 'Q币'
+            if combination == 'qqq':
+                word = 'QQ群'
+            if combination == 'tgq':
+                word = 'TG群'
+            if combination == 'kxm':
+                word = 'K线'
+            if combination == 'upv':
+                word = 'UP主'
+            if combination == 'wwc':
+                word = '维C'
+            if combination == 'cpj':
+                word = 'C盘'
+            if combination == 'kge':
+                word = 'K歌'
+            if combination == 'ptu':
+                word = 'P图'
+            if combination == 'lbt':
+                word = '路边摊'
+            if combination == 'zrm':
+                word = '自然码'
+            if combination == 'urf':
+                word = '输入法'
+            if combination == 'fvm':
+                word = '辅助码'
+            if combination == 'agu':
+                word = 'A股'
+            if combination == 'bic':
+                word = 'B超'
             file.write(word+"\t"+combination + "\n")
 
             # print(combination + " " + str(word_freq_list))

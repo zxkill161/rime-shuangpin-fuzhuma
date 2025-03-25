@@ -66,8 +66,61 @@ with open(file_path, "w") as file:
             word_freq_list = word_freq_list[:1]
             for word_freq in word_freq_list:
                 word = word_freq['word']
-                print(word+"\t"+combination+"|")
-
+                # print(word+"\t"+combination+"|")
+                if combination == 'xgl':
+                    word = 'X光'
+                if combination == 'txu':
+                    word = 'T恤'
+                if combination == 'upj':
+                    word = 'U盘'
+                if combination == 'bvj':
+                    word = 'B站'
+                if combination == 'qbi':
+                    word = 'Q币'
+                if combination == 'qqq':
+                    word = 'QQ群'
+                if combination == 'tgq':
+                    word = 'TG群'
+                if combination == 'kxm':
+                    word = 'K线'
+                if combination == 'upv':
+                    word = 'UP主'
+                if combination == 'wwc':
+                    word = '维C'
+                if combination == 'cpj':
+                    word = 'C盘'
+                if combination == 'kge':
+                    word = 'K歌'
+                if combination == 'ptu':
+                    word = 'P图'
+                if combination == 'uxg':
+                    word = '鼠须管'
+                if combination == 'xlh':
+                    word = '小狼毫'
+                if combination == 'vvy':
+                    word = '中州韵'
+                if combination == 'lbt':
+                    word = '路边摊'
+                if combination == 'zrm':
+                    word = '自然码'
+                if combination == 'xqy':
+                    word = '星期一'
+                if combination == 'shu':
+                    word = '俗话说'
+                if combination == 'ulx':
+                    word = '试了下'
+                if combination == 'kdd':
+                    word = '空荡荡'
+                if combination == 'dyz':
+                    word = '多音字'
+                if combination == 'urf':
+                    word = '输入法'
+                if combination == 'fvm':
+                    word = '辅助码'
+                if combination == 'agu':
+                    word = 'A股'
+                if combination == 'bic':
+                    word = 'B超'
                 file.write(word+"\t"+combination+"/" + "\n")
 
             # print(combination + " " + str(word_freq_list))

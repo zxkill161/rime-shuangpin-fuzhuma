@@ -1,4 +1,5 @@
 import os
+from collections import OrderedDict
 
 # Function to read a file
 def read_file(file_path):
@@ -47,6 +48,7 @@ def update_missing_encodings(file_path, write_file_path, dict_data):
         pinyin_list = encoding.split(" ")
         double_list = ""
         pinyin_index = 0
+        #print(line)
         for pinyin in pinyin_list:
             if len(pinyin) == 2:
                 double_pinyin = pinyin
@@ -122,6 +124,7 @@ def update_missing_encodings(file_path, write_file_path, dict_data):
                     print("!!!!double_pinyin " + double_pinyin + " " + pinyin + " ")
                 
             clean_character = character.replace("·", "")
+            #print(line)
             character_encoding_pre = clean_character[pinyin_index]
             # character_encoding_pre = character[pinyin_index]
             encoding_post = dict_data.get(character_encoding_pre, "[")
@@ -164,6 +167,7 @@ with open('./opencc/moqi_chaifen.txt', 'r', encoding='utf-8') as dict_file:
 
 print("巴 " + dict_data['巴'])
 print("𬱖 " + dict_data['𬱖'])
+print("㪱 " + dict_data['㪱'])
 
 for file_name in file_list:
     # File paths
@@ -174,3 +178,50 @@ for file_name in file_list:
     print(yaml_file_path)
     # Update missing encodings in the file
     update_missing_encodings(yaml_file_path, write_file_path, dict_data)
+
+# 聚合细胞词库
+frost_cell_dict_path = os.path.expanduser("~/vscode/rime-frost/cn_dicts_cell")
+# 使用 os 模块中的 listdir 函数列出指定文件夹中的所有文件和子目录
+cell_file_names = os.listdir(frost_cell_dict_path)
+word_map = OrderedDict()
+for file_name in cell_file_names:
+    read_file_name = os.path.join(os.path.expanduser("~/vscode/rime-frost/cn_dicts_cell"), file_name)
+    #print(read_file_name)
+    
+    with open(read_file_name, 'r') as file:
+        # 逐行读取文件内容
+        for line in file:
+            # 去除行尾的换行符
+            line = line.rstrip()
+            if line.startswith('#') or '\t' not in line:
+                continue
+            params = line.split("\t")
+            word = params[0]
+            encode = params[1]
+            
+            key = word + encode
+            if key not in word_map:
+                word_map[line]=''
+    
+write_cell_file_name = os.path.join('cn_dicts_dazhu', 'cell.dict.yaml')
+write_cell_file = open(write_cell_file_name, 'w')
+write_cell_file.write("""# Rime dictionary
+# encoding: utf-8
+# 细胞词库 来自https://github.com/gaboolic/rime-frost/tree/master/cn_dicts_cell
+---
+name: cell
+version: "2024-07-17"
+sort: by_weight
+...
+# +_+
+""")
+for word in word_map:
+    write_cell_file.write(word+"\n")
+write_cell_file.close()
+
+yaml_file_path = os.path.join('cn_dicts_dazhu', 'cell.dict.yaml')
+write_file_path = os.path.join('cn_dicts_moqi', 'cell.dict.yaml')
+
+print(yaml_file_path)
+# Update missing encodings in the file
+update_missing_encodings(yaml_file_path, write_file_path, dict_data)

@@ -2,6 +2,7 @@
 # encoding: utf-8
 # https://github.com/gaboolic/rime-shuangpin-fuzhuma
 
+
 schema:
   schema_id: moqi_single_xh
   name: 墨奇音形·顶屏版·鹤拼
@@ -56,25 +57,25 @@ engine:
       - table_translator@big_char
       - reverse_lookup_translator
       - reverse_lookup_translator@reverse_moqima
-      - reverse_lookup_translator@reverse_chaizi
+      - reverse_lookup_translator@radical_flypy
       - reverse_lookup_translator@reverse_stroke
       - reverse_lookup_translator@reverse_zrlf
       - reverse_lookup_translator@reverse_cj
       - table_translator
-      - lua_translator@date_translator    # 时间、日期、星期
-      - lua_translator@lunar              # 农历
+      - lua_translator@*date_translator    # 时间、日期、星期
+      - lua_translator@*lunar              # 农历
       - table_translator@emojis ## 添加注释后：停用ae模式emoji输入
       - table_translator@easy_en_simp ## 添加注释后：停用单词输入
       - table_translator@jp_sela ## 添加注释后：停用日语输入
-      - lua_translator@unicode            # Unicode
-      - lua_translator@number_translator  # 数字、金额大写
-      - lua_translator@calc_translator    # 计算器
+      - lua_translator@*unicode            # Unicode
+      - lua_translator@*number_translator  # 数字、金额大写
+      - lua_translator@*calculator    # 计算器
     filters:
       # tab置顶词回显在第一个comment中
       - lua_filter@*stick 
-      - lua_filter@long_word_filter                   # 长词优先（顺序要求：长词优先 > Emoji）
+      - lua_filter@*long_word_filter                   # 长词优先（顺序要求：长词优先 > Emoji）
       - simplifier@emoji                              # Emoji
-      # - lua_filter@reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
+      # - lua_filter@*reduce_emoji_filter   # 按需启用，作用是降低Emoji在候选项中的位置排序(顺序要求：Emoji > 降低排序)
       - simplifier@chaifen
       - simplifier@chaifen_all
       - simplifier@chinese_english
@@ -232,6 +233,8 @@ key_binder:
 
 
     - { match: "[a-z]{1,3}", accept: Tab,  send_sequence: "/1" }
+    - { match: "[a-z]{1,3}", accept: slash,  send_sequence: "/1" }
+    - { match: "[a-z]{1,3}", accept: ".",  send_sequence: "/1" }
     # - { when: composing, match: "[a-z]{2}", accept: Tab, send: '|' }
     ## 对以下4行取消注释后：启用光标回退至特定音节后、补充辅助码的功能
     #- { when: composing, accept: Control+1, send_sequence: '{Home}{Shift+Right}[' }
