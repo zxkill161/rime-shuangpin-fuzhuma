@@ -42,7 +42,7 @@ for file in file_list:
             word_freq["word"] = word
             word_freq["freq"] = freq
 
-            if int(freq) < 998:
+            if int(freq) < 1:
                 continue
             if jianpin not in jianpin_word_map:
                 word_list = []
@@ -57,9 +57,16 @@ print(jianpin_word_map)
 
 
 
-file_path = "4code_word.txt"
+file_path = os.path.join('cn_dicts_moqi', 'word.dict.yaml')
 
 with open(file_path, "w") as file:
+    file.write("""## 4码 2字词 使用deal_4code_word.py生成
+---
+name: word
+version: "2024-06-05"
+sort: by_weight
+...""")
+    file.write("\n")
     file.write("## 4码 2字词 使用deal_4code_word.py生成\n")
                 
 

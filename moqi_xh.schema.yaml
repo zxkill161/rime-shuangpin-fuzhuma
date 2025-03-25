@@ -2,6 +2,7 @@
 # encoding: utf-8
 # https://github.com/gaboolic/rime-shuangpin-fuzhuma
 
+
 schema:
   schema_id: moqi_xh
   name: 墨奇音形+小鹤双拼
@@ -11,6 +12,7 @@ schema:
   description: |
     墨奇辅助码 鹤拼版 大词库版本 非自动上屏，支持4万字 https://github.com/gaboolic/rime-shuangpin-fuzhuma/wiki/%E5%A2%A8%E5%A5%87%E7%A0%81%E6%8B%86%E5%88%86%E8%A7%84%E5%88%99
   dependencies:
+    - cangjie5
     - reverse_moqima
     - radical_flypy
     - stroke
@@ -19,6 +21,7 @@ schema:
     - easy_en
     - jp_sela
     - moqi_big
+    
 
 __include: moqi.yaml:/switches_engine
 __include: moqi.yaml:/phrase # 置顶
@@ -30,8 +33,8 @@ __include: moqi.yaml:/guide # 引导前缀配置
 speller:
   max_code_length: 5
   # table_translator翻译器，支持自动上屏。例如 “zmhu”可以自动上屏“怎么回事”
-  auto_select: true
-  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}
+  auto_select: false
+  auto_select_pattern: ^[a-z]+/|^[a-df-zA-DF-Z]\w{3}|^e\w{4}|;[a-z]
   # 如果不想让什么标点直接上屏，可以加在 alphabet，或者编辑标点符号为两个及以上的映射
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA[/|
   # initials 定义仅作为始码的按键，排除 ` 让单个的 ` 可以直接上屏
@@ -94,14 +97,14 @@ speller:
     - derive/^xq/xo/
     - derive/^qq/qo/
     - derive/^ww/wi/
-    - derive/^y([a-df-qs-z])/e$1/ # y -> e互击
+    # - derive/^y([a-df-qs-z])/e$1/ # y -> e互击
     - derive/^j([a-twyz])/f$1/ # j -> f互击
     # - derive/^jn/jv/
     # - derive/^mn/mv/
     # - derive/^jm/jz/
     - derive/^([y])h/$1g/
     # - derive/^([rgv])f/$1m/
-    - derive/^([rgv])c/$1n/
+    - derive/^([rsgv])c/$1n/
 
 
 __include: moqi.yaml:/big_char_and_user_dict # 大字集、自造词
@@ -109,6 +112,7 @@ __include: moqi.yaml:/big_char_and_user_dict # 大字集、自造词
 translator:
   dictionary: moqi.extended
   initial_quality: 10000
+  # 是否自动补全（预测），酌情开启。开启之后，打ilqmmkyt的时候，2选会是"床前明月光"。但是影响3码简码，例如idz首选会变成"拆字"而非"扯犊子"
   enable_completion: false
   ##  默认为不超过 2 个字的候选项显示输入码；将 2 改为 0 可关闭编码提示，
   ##  改为 1 则是只显示单字的输入码，依此类推。
@@ -170,6 +174,9 @@ key_binder:
     # - { when: has_menu, accept: slash, send: 3 } # 用/进行选3
     - { when: composing, accept: Control+i, send: Shift+Right }
     - { when: composing, accept: Control+o, send: Shift+Left }
+
+    # 大小字集切换
+    - { when: has_menu, accept: "Control+u", toggle: big_char_set }
     # 显示墨奇码拆分的快速开关
     - { when: has_menu, accept: "Control+p", toggle: chaifen }
     - { when: has_menu, accept: "Control+l", toggle: chaifen_all }
@@ -190,8 +197,36 @@ key_binder:
     - { when: composing, accept: Control+6, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}[' }
     - { when: composing, accept: Control+7, send_sequence: '{Home}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}{Shift+Right}[' }
 
+    # 大写辅助码加到整句第一个音节，例如iuyyfw默认是楚云飞，按下shift+u (iuu yy fw)变成出运费
+    - { when: has_menu, accept: Shift+A, send_sequence: "{Shift+Right}a{Shift+Right}" }
+    - { when: has_menu, accept: Shift+B, send_sequence: "{Shift+Right}b{Shift+Right}" }
+    - { when: has_menu, accept: Shift+C, send_sequence: "{Shift+Right}c{Shift+Right}" }
+    - { when: has_menu, accept: Shift+D, send_sequence: "{Shift+Right}d{Shift+Right}" }
+    - { when: has_menu, accept: Shift+E, send_sequence: "{Shift+Right}e{Shift+Right}" }
+    - { when: has_menu, accept: Shift+F, send_sequence: "{Shift+Right}f{Shift+Right}" }
+    - { when: has_menu, accept: Shift+G, send_sequence: "{Shift+Right}g{Shift+Right}" }
+    - { when: has_menu, accept: Shift+H, send_sequence: "{Shift+Right}h{Shift+Right}" }
+    - { when: has_menu, accept: Shift+I, send_sequence: "{Shift+Right}i{Shift+Right}" }
+    - { when: has_menu, accept: Shift+J, send_sequence: "{Shift+Right}j{Shift+Right}" }
+    - { when: has_menu, accept: Shift+K, send_sequence: "{Shift+Right}k{Shift+Right}" }
+    - { when: has_menu, accept: Shift+L, send_sequence: "{Shift+Right}l{Shift+Right}" }
+    - { when: has_menu, accept: Shift+M, send_sequence: "{Shift+Right}m{Shift+Right}" }
+    - { when: has_menu, accept: Shift+N, send_sequence: "{Shift+Right}n{Shift+Right}" }
+    - { when: has_menu, accept: Shift+O, send_sequence: "{Shift+Right}o{Shift+Right}" }
+    - { when: has_menu, accept: Shift+P, send_sequence: "{Shift+Right}p{Shift+Right}" }
+    - { when: has_menu, accept: Shift+Q, send_sequence: "{Shift+Right}q{Shift+Right}" }
+    - { when: has_menu, accept: Shift+R, send_sequence: "{Shift+Right}r{Shift+Right}" }
+    - { when: has_menu, accept: Shift+S, send_sequence: "{Shift+Right}s{Shift+Right}" }
+    - { when: has_menu, accept: Shift+T, send_sequence: "{Shift+Right}t{Shift+Right}" }
+    - { when: has_menu, accept: Shift+U, send_sequence: "{Shift+Right}u{Shift+Right}" }
+    - { when: has_menu, accept: Shift+V, send_sequence: "{Shift+Right}v{Shift+Right}" }
+    - { when: has_menu, accept: Shift+W, send_sequence: "{Shift+Right}w{Shift+Right}" }
+    - { when: has_menu, accept: Shift+X, send_sequence: "{Shift+Right}x{Shift+Right}" }
+    - { when: has_menu, accept: Shift+Y, send_sequence: "{Shift+Right}y{Shift+Right}" }
+    - { when: has_menu, accept: Shift+Z, send_sequence: "{Shift+Right}z{Shift+Right}" }
+
 # 启用語言模型
-# __include: moqi:/octagram/enable_for_sentence
+__include: moqi:/octagram/enable_for_sentence
 
 # 3码出简让全
 custom_phrase_3_code:

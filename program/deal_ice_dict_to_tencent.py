@@ -36,8 +36,8 @@ def update_missing_encodings(file_path, write_file_path, dict_data):
         
         
         if "tencent" in file_path :
-            updated_line = f"{character}\t30"
-            updated_content += updated_line + '\n'
+            # updated_line = f"{character}\t30"
+            updated_content += line + '\n'
             continue
         else:
             if encoding == "100":
@@ -134,20 +134,20 @@ def update_missing_encodings(file_path, write_file_path, dict_data):
             # updated_content += line + '\n'
             pass
 
-        if "tencent" in file_path :
+        if "tencent" in file_path and False:
             updated_line = f"{character}\t99"
         else:
             if frequency is not None:
                 updated_line = f"{character}\t{double_list}\t{frequency}"
             else :
-                updated_line = f"{character}\t{double_list}"
+                updated_line = f"{character}\t{double_list}\t1"
         updated_content += updated_line + '\n'
 
     # Write the updated content back to the file
     write_file(write_file_path, updated_content)
 
 dict_data = {}
-file_list = ['tencent.dict.yaml']
+file_list = ['tencent.dict.yaml','tencent_core.dict.yaml']
 # file_list = [ 'tencent.dict.yaml']
 # Load the dict data from the provided file
 # with open('./moqima.txt', 'r', encoding='utf-8') as dict_file:
