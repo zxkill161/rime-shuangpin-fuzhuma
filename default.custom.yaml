@@ -1,6 +1,6 @@
 patch:
   schema_list:
-    - schema: zrm_zrm # 自然码+自然码部首辅助码
+    - schema: moqi_wan_zrm # 自然码+自然码部首辅助码
     #- schema: moqi_zrm # 墨奇码自然双拼版
     - schema: luna_pinyin_simp # 朙月拼音
      
