@@ -40,7 +40,7 @@ files = [
 
          'moqi_single_xh.schema.yaml','moqi_single.dict.yaml',
 
-         'moqi_big.schema.yaml','moqi_big.extended.dict.yaml',
+         'moqi_big.schema.yaml',
          'symbols_caps_v.yaml','rime.lua','moqi.yaml',
          
          'cangjie5.dict.yaml','cangjie5.schema.yaml','easy_en.dict.yaml','easy_en.schema.yaml',
@@ -50,4 +50,4 @@ files = [
          'reverse_moqima.dict.yaml','reverse_moqima.schema.yaml',
          'zrlf.dict.yaml','zrlf.schema.yaml'
          ]  
-zip_folders_and_files('rime-moqi-wanxiang-schemas.zip', folders, files)
+zip_folders_and_files('rime-moqi-schemas.zip', folders, files)
